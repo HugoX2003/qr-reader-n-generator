@@ -1,0 +1,1 @@
+Simple project using HTML, Javascript and CSS to do a QR Code Reader and Generator

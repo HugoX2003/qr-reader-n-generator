@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador y Lector de Códigos QR</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-qrcode"></i> Códigos QR a la mano </h1>
+            <p class="tagline">Crear y leer códigos QR </p>
+        </header>
+        
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="generator">Generar </button>
+            <button class="tab-btn" data-tab="reader">Leer QR</button>
+        </div>
+        
+        <div id="generator" class="tab-content active">
+            <div class="card">
+                <div class="input-section">
+                    <div class="form-group">
+                        <label for="qr-input">Texto o URL</label>
+                        <input type="text" id="qr-input" placeholder="Enter text or URL" />
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="qr-size">Tamaño de QR</label>
+                        <select id="qr-size">
+                            <option value="128">Pequeño (128×128)</option>
+                            <option value="256" selected>Mediano (256×256)</option>
+                            <option value="400">Grande (400×400)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="error-correction">Error Correction</label>
+                        <select id="error-correction">
+                            <option value="L">Low (7%)</option>
+                            <option value="M" selected>Medium (15%)</option>
+                            <option value="Q">Quartile (25%)</option>
+                            <option value="H">High (30%)</option>
+                        </select>
+                    </div>
+                    
+                    <button id="generate-btn" class="primary-btn">Generar Código QR</button>
+                </div>
+                
+                <div class="output-section">
+                    <div id="qr-code" class="qr-code"></div>
+                    <div class="qr-actions" id="qr-actions" style="display:none;">
+                        <button id="download-btn" class="secondary-btn">
+                            <i class="fas fa-download"></i> Descargar PNG
+                        </button>
+                        <button id="download-svg-btn" class="secondary-btn">
+                            <i class="fas fa-file-code"></i> Descargar SVG
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="reader" class="tab-content">
+            <div class="card">
+                <div class="reader-container">
+                    <div id="video-container">
+                        <video id="scanner-video" playsinline></video>
+                        <canvas id="scanner-canvas" style="display:none;"></canvas>
+                    </div>
+                    
+                    <div class="reader-controls">
+                        <button id="start-scanner" class="primary-btn">
+                            <i class="fas fa-camera"></i> Empezar Scanner
+                        </button>
+                        <button id="stop-scanner" class="secondary-btn" style="display:none;">
+                            <i class="fas fa-stop"></i> Parar Scanner
+                        </button>
+                    </div>
+                    
+                    <div id="scan-result" class="result-container">
+                        <h3>Resultado:</h3>
+                        <div id="result-text" class="result-text">No se detectó ningún código QR aún</div>
+                        <div class="result-actions" style="display:none;">
+                            <button id="copy-result" class="secondary-btn">
+                                <i class="fas fa-copy"></i> Copiar
+                            </button>
+                            <a id="open-link" href="#" target="_blank" class="secondary-btn">
+                                <i class="fas fa-external-link-alt"></i> Abrir
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
